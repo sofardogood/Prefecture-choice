@@ -1,0 +1,614 @@
+/* ===========================================
+   運命の旅先 - 日本風シンプルデザイン
+   =========================================== */
+
+/* カスタムプロパティ（カラーパレット） */
+:root {
+    /* 墨色系 */
+    --sumi-black: #2c2c2c;
+    --sumi-gray: #4a4a4a;
+    --sumi-light: #6b6b6b;
+    
+    /* 朱色系 */
+    --shu-red: #c53d43;
+    --shu-light: #d4656a;
+    --shu-dark: #a13238;
+    
+    /* 藍色系 */
+    --ai-blue: #165e83;
+    --ai-light: #2d7a9e;
+    --ai-dark: #0e4560;
+    
+    /* 和紙・背景色 */
+    --washi-white: #f8f5f0;
+    --washi-cream: #f0ebe3;
+    --washi-beige: #e8e0d5;
+    
+    /* 金色アクセント */
+    --kin-gold: #c9a959;
+    --kin-light: #d4bc7a;
+    
+    /* フォント */
+    --font-mincho: 'Shippori Mincho', 'Noto Serif JP', serif;
+    --font-serif: 'Noto Serif JP', serif;
+    
+    /* スペーシング */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    
+    /* トランジション */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.4s ease;
+    --transition-slow: 0.6s ease;
+}
+
+/* リセット */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ベーススタイル */
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-mincho);
+    background: linear-gradient(
+        135deg,
+        var(--washi-white) 0%,
+        var(--washi-cream) 50%,
+        var(--washi-beige) 100%
+    );
+    color: var(--sumi-black);
+    min-height: 100vh;
+    line-height: 1.8;
+    position: relative;
+}
+
+/* 和紙テクスチャのオーバーレイ */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* コンテナ */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+}
+
+/* ===========================================
+   ヘッダー
+   =========================================== */
+.header {
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--sumi-black);
+    letter-spacing: 0.3em;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+}
+
+.title::before,
+.title::after {
+    content: '〜';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--shu-red);
+    font-size: 1.5rem;
+}
+
+.title::before {
+    left: -2rem;
+}
+
+.title::after {
+    right: -2rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--sumi-light);
+    letter-spacing: 0.2em;
+}
+
+/* ===========================================
+   入力セクション
+   =========================================== */
+.input-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.input-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 20px rgba(44, 44, 44, 0.08);
+    border: 1px solid rgba(197, 61, 67, 0.1);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--sumi-black);
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: 0.15em;
+}
+
+.section-desc {
+    font-size: 0.95rem;
+    color: var(--sumi-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+}
+
+.city-input {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-mincho);
+    font-size: 1.1rem;
+    color: var(--sumi-black);
+    background: var(--washi-white);
+    border: 2px solid var(--washi-beige);
+    border-radius: 4px;
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.city-input::placeholder {
+    color: var(--sumi-light);
+    opacity: 0.6;
+}
+
+.city-input:focus {
+    border-color: var(--shu-red);
+    box-shadow: 0 0 0 3px rgba(197, 61, 67, 0.1);
+}
+
+/* サジェストドロップダウン */
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--washi-beige);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: none;
+}
+
+.suggestions.active {
+    display: block;
+}
+
+.suggestion-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    text-align: left;
+    border-bottom: 1px solid var(--washi-beige);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background: var(--washi-cream);
+}
+
+.suggestion-item .city-name {
+    font-weight: 500;
+    color: var(--sumi-black);
+}
+
+.suggestion-item .prefecture-name {
+    font-size: 0.85rem;
+    color: var(--sumi-light);
+    margin-left: var(--spacing-xs);
+}
+
+/* 運命ボタン */
+.destiny-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-family: var(--font-mincho);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, var(--shu-red) 0%, var(--shu-dark) 100%);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 15px rgba(197, 61, 67, 0.3);
+}
+
+.destiny-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(197, 61, 67, 0.4);
+}
+
+.destiny-button:active {
+    transform: translateY(0);
+}
+
+.button-icon {
+    transition: transform var(--transition-fast);
+}
+
+.destiny-button:hover .button-icon {
+    transform: translateX(4px);
+}
+
+/* ===========================================
+   結果セクション
+   =========================================== */
+.result-section {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all var(--transition-slow);
+}
+
+.result-section.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    display: none;
+}
+
+/* 都道府県カード */
+.prefecture-card {
+    background: linear-gradient(135deg, var(--ai-blue) 0%, var(--ai-dark) 100%);
+    color: white;
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 8px 30px rgba(22, 94, 131, 0.3);
+    animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.prefecture-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.prefecture-label {
+    display: block;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.prefecture-name {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.distance-info {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.distance-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.distance-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--kin-gold);
+}
+
+.distance-unit {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.distance-message {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* 観光地カード */
+.spots-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(44, 44, 44, 0.08);
+    animation: slideUp 0.6s ease 0.2s forwards;
+    opacity: 0;
+}
+
+.spots-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--sumi-black);
+    text-align: center;
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: 0.15em;
+}
+
+.spots-subtitle {
+    font-size: 0.9rem;
+    color: var(--sumi-light);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.spots-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.spot-item {
+    padding: var(--spacing-md);
+    background: var(--washi-white);
+    border-radius: 6px;
+    border-left: 4px solid var(--shu-red);
+    transition: all var(--transition-fast);
+}
+
+.spot-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.spot-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--sumi-black);
+    margin-bottom: var(--spacing-xs);
+}
+
+.spot-description {
+    font-size: 0.95rem;
+    color: var(--sumi-gray);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.7;
+}
+
+.spot-highlight {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--shu-red);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: rgba(197, 61, 67, 0.08);
+    border-radius: 4px;
+}
+
+/* アドバイスカード */
+.advice-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(44, 44, 44, 0.08);
+    animation: slideUp 0.6s ease 0.4s forwards;
+    opacity: 0;
+}
+
+.advice-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--sumi-black);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: 0.15em;
+}
+
+.advice-content {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.advice-section {
+    padding: var(--spacing-md);
+    background: var(--washi-white);
+    border-radius: 6px;
+}
+
+.advice-section-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ai-blue);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.advice-section-title::before {
+    content: '◆';
+    font-size: 0.8rem;
+}
+
+.advice-list {
+    list-style: none;
+    padding: 0;
+}
+
+.advice-list li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.95rem;
+    color: var(--sumi-gray);
+}
+
+.advice-list li::before {
+    content: '・';
+    position: absolute;
+    left: 0;
+    color: var(--shu-red);
+}
+
+/* 励ましカード */
+.encouragement-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    animation: slideUp 0.6s ease 0.6s forwards;
+    opacity: 0;
+}
+
+.encouragement-text {
+    font-size: 1.3rem;
+    color: var(--sumi-black);
+    line-height: 2;
+    letter-spacing: 0.1em;
+}
+
+/* リトライボタン */
+.retry-button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-family: var(--font-mincho);
+    font-size: 1.1rem;
+    color: var(--sumi-black);
+    background: transparent;
+    border: 2px solid var(--sumi-black);
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all var(--transition-fast);
+    animation: slideUp 0.6s ease 0.8s forwards;
+    opacity: 0;
+}
+
+.retry-button:hover {
+    background: var(--sumi-black);
+    color: white;
+}
+
+/* ===========================================
+   フッター
+   =========================================== */
+.footer {
+    text-align: center;
+    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+}
+
+.footer-text {
+    font-size: 0.95rem;
+    color: var(--sumi-light);
+    letter-spacing: 0.2em;
+}
+
+/* ===========================================
+   レスポンシブ
+   =========================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-md);
+    }
+    
+    .title {
+        font-size: 2rem;
+        letter-spacing: 0.15em;
+    }
+    
+    .title::before,
+    .title::after {
+        display: none;
+    }
+    
+    .prefecture-name {
+        font-size: 2rem;
+        letter-spacing: 0.15em;
+    }
+    
+    .distance-number {
+        font-size: 2rem;
+    }
+    
+    .input-card,
+    .spots-card,
+    .advice-card {
+        padding: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .prefecture-name {
+        font-size: 1.6rem;
+    }
+}

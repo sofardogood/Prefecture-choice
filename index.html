@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運命の旅先 | 日本再発見</title>
+    <meta name="description" content="ランダムに選ばれた都道府県の隠れた名所を発見し、日本の広さと魅力を感じる旅に出かけましょう。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <h1 class="title">運命の旅先</h1>
+            <p class="subtitle">〜 日本再発見の旅へ 〜</p>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="main">
+            <!-- 居住地入力セクション -->
+            <section class="input-section" id="inputSection">
+                <div class="input-card">
+                    <h2 class="section-title">あなたの居住地</h2>
+                    <p class="section-desc">お住まいの市区町村を入力してください</p>
+                    
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="cityInput" 
+                            class="city-input" 
+                            placeholder="例：渋谷区、大阪市、札幌市..."
+                            autocomplete="off"
+                        >
+                        <div class="suggestions" id="suggestions"></div>
+                    </div>
+                    
+                    <button class="destiny-button" id="destinyButton">
+                        <span class="button-text">運命の都道府県を選ぶ</span>
+                        <span class="button-icon">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 結果セクション（初期は非表示） -->
+            <section class="result-section hidden" id="resultSection">
+                <!-- 選ばれた都道府県 -->
+                <div class="prefecture-card" id="prefectureCard">
+                    <div class="prefecture-header">
+                        <span class="prefecture-label">あなたの運命の旅先は</span>
+                        <h2 class="prefecture-name" id="prefectureName"></h2>
+                    </div>
+                    
+                    <div class="distance-info" id="distanceInfo">
+                        <div class="distance-value">
+                            <span class="distance-number" id="distanceNumber"></span>
+                            <span class="distance-unit">km</span>
+                        </div>
+                        <p class="distance-message" id="distanceMessage"></p>
+                    </div>
+                </div>
+
+                <!-- 観光地リスト -->
+                <div class="spots-card" id="spotsCard">
+                    <h3 class="spots-title">隠れた名所たち</h3>
+                    <p class="spots-subtitle">地元の人しか知らない、とっておきの場所</p>
+                    <div class="spots-list" id="spotsList"></div>
+                </div>
+
+                <!-- 旅行アドバイス -->
+                <div class="advice-card" id="adviceCard">
+                    <h3 class="advice-title">旅の準備</h3>
+                    <div class="advice-content" id="adviceContent"></div>
+                </div>
+
+                <!-- 励ましメッセージ -->
+                <div class="encouragement-card" id="encouragementCard">
+                    <p class="encouragement-text" id="encouragementText"></p>
+                </div>
+
+                <!-- もう一度ボタン -->
+                <button class="retry-button" id="retryButton">
+                    別の運命を探す
+                </button>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <p class="footer-text">日本の広さと美しさを、あなたに。</p>
+        </footer>
+    </div>
+
+    <script src="data/prefectures.js"></script>
+    <script src="data/cities.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
